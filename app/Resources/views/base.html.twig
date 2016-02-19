@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+        {% stylesheets 
+        'assets/vendor/bootstrap/dist/css/bootstrap.min.css'
+        'assets/vendor/ladda-bootstrap/dist/ladda-themeless.min.css'
+        '@AppBundle/Resources/public/css/*'
+        filter='cssrewrite' output='css/compiled/main.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}">
+    {% endstylesheets %}
+        
+    </head>
+    <body style="margin: 10px;" ng-app="modal">
+        <div id="wrapper" ng-controller="MainCtrl">
+        <div class="modal_container">
+            <modal id="modal" title="[[ modalTitle ]]" visible="showModal">
+                <form id="modal-form" role="form" data-toggle="validator" method="post" action="[[ formAction ]]" ng-controller="MainCtrl" enctype="multipart/form-data">
+                    <div ng-bind-html="modalHtml | unsafe"></div>
+                </form>
+            </modal>
+        </div>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+    {% javascripts
+        'assets/vendor/jquery/jquery.min.js'
+        'assets/vendor/angular/angular.min.js'
+        'assets/vendor/bootstrap/dist/js/bootstrap.min.js'
+        'assets/vendor/bootstrap/js/modal.js'
+        'assets/vendor/bootstrap3-dialog/src/js/bootstrap-dialog.js'
+        'assets/vendor/bootstrap-validator/dist/validator.js'
+        'assets/vendor/ladda-bootstrap/js/spin.js'
+        'assets/vendor/ladda-bootstrap/js/ladda.js'
+        '@AppBundle/Resources/public/js/*'
+        output='js/compiled/main.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {% block javascript %}{% endblock %}
+</html>

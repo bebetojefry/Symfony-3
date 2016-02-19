@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <button class="btn btn-primary ladda-button" data-style="expand-left" ng-click="toggleModal($event)" formAction="{{ path('api') }}" modalTitle="API Modal" modalUrl="{{ path('api') }}" >
+                <span class="ladda-label">Call Service</span>
+            </button>
+        </div>
+    </div>
+{% endblock %}
